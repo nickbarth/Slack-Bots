@@ -4,7 +4,7 @@
 (defconstant HS_API_KEY "xxxx")
 
 (defvar *slack-rtm-url* (concatenate 'string "https://slack.com/api/rtm.start?token=" SLACK_API_KEY))
-(defvar *slack-msg-url* (concatenate 'string "https://slack.com/api/chat.postMessage?as_user=false&token=" SLACK_API_KEY))
+(defvar *slack-msg-url* (concatenate 'string "https://slack.com/api/chat.postMessage?as_user=true&token=" SLACK_API_KEY))
 (defvar *hs-api-url* "https://omgvamp-hearthstone-v1.p.mashape.com/cards/")
 
 (defun https-json-request (url &optional headers params)
