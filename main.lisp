@@ -4,7 +4,7 @@
 (defconstant HS_API_KEY "XXXX")
 
 (defvar *slack-rtm-url* (concatenate 'string "https://slack.com/api/rtm.start?token=" SLACK_API_KEY))
-(defvar *slack-msg-url* (concatenate 'string "https://slack.com/api/chat.postMessage?as_user=true&token=" SLACK_API_KEY))
+(defvar *slack-chat-url* (concatenate 'string "https://slack.com/api/chat.postMessage?as_user=true&token=" SLACK_API_KEY))
 (defvar *hs-api-url* "https://omgvamp-hearthstone-v1.p.mashape.com/cards/")
 
 (defun https-json-request (url &optional headers params)
@@ -24,7 +24,7 @@
             (cdr (assoc ':TEXT payload)))))
 
 (defun send-slack-message (message channel)
-  (https-json-request *slack-msg-url* nil
+  (https-json-request *slack-chat-url* nil
     (list (cons "channel" channel) (cons "text" message))))
 
 (defun get-card-image (card)
