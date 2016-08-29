@@ -39,7 +39,7 @@
       "Card Not Found" (cdr (assoc ':IMG json)))))
 
 (defun asked-for-card? (slack type message)
-  (and (string-equal type "message") 
+  (and (string-equal type "message")
   (search (concatenate 'string "<@" (cdr (assoc ':ID slack)) "> card ") message)))
 
 (defun send-card-image (slack card channel)
