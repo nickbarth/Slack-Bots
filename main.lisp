@@ -35,8 +35,8 @@
   (let* ((api (concatenate 'string *hs-api-url* (cl-ppcre:regex-replace-all " " card "%20")))
         (headers (list (cons "x-mashape-key" HS_API_KEY)))
         (json (car (https-json-request api headers))))
-    (if (eq (car json) ':ERROR) "Card Not Found"
-  (cdr (assoc ':IMG json)))))
+    (if (eq (car json) ':ERROR)
+    "Card Not Found" (cdr (assoc ':IMG json)))))
 
 (defun asked-for-card? (slack type message)
   (and (string-equal type "message") 
