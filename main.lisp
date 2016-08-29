@@ -28,11 +28,11 @@
             (cdr (assoc ':TEXT payload)))))
 
 (defun post-slack-message (slack message channel)
-  (https-json-request SLACK_MSG_URL nil
+  (https-json-request *slack-msg-url* nil
     (list (cons "username" (cdr (assoc ':NAME slack))) (cons "channel" channel) (cons "text" message))))
 
 (defun get-card-image (card)
-  (let* ((api (concatenate 'string HS_API_URL (cl-ppcre:regex-replace-all " " card "%20")))
+  (let* ((api (concatenate 'string *hs-api-url* (cl-ppcre:regex-replace-all " " card "%20")))
         (headers (list (cons "x-mashape-key" HS_API_KEY)))
         (json (car (https-json-request api headers))))
     (if (eq (car json) ':ERROR) "Card Not Found"
