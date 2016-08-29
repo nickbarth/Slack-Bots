@@ -3,9 +3,9 @@
 (defconstant SLACK_API_KEY "xxxx")
 (defconstant HS_API_KEY "xxxx")
 
-(defconstant SLACK_RTM_URL (concatenate 'string "https://slack.com/api/rtm.start?token=" SLACK_API_KEY))
-(defconstant SLACK_MSG_URL (concatenate 'string "https://slack.com/api/chat.postMessage?as_user=false&token=" SLACK_API_KEY))
-(defconstant HS_API_URL "https://omgvamp-hearthstone-v1.p.mashape.com/cards/")
+(defvar *slack-rtm-url* (concatenate 'string "https://slack.com/api/rtm.start?token=" SLACK_API_KEY))
+(defvar *slack-msg-url* (concatenate 'string "https://slack.com/api/chat.postMessage?as_user=false&token=" SLACK_API_KEY))
+(defvar *hs-api-url* "https://omgvamp-hearthstone-v1.p.mashape.com/cards/")
 
 (defun https-json-request (url &optional headers)
   (let* ((resp (flexi-streams:octets-to-string
@@ -16,7 +16,7 @@
   (wsd:make-client (cdr (assoc ':URL slack))))
 
 (defun get-slack-info ()
-  (let ((json (https-json-request SLACK_RTM_URL)))
+  (let ((json (https-json-request *slack-rtm-url*)))
     (list (assoc ':ID (cdr (assoc ':SELF json)))
           (assoc ':NAME (cdr (assoc ':SELF json)))
           (assoc ':URL json))))
@@ -28,11 +28,11 @@
             (cdr (assoc ':TEXT payload)))))
 
 (defun post-slack-message (slack message channel)
-  (https-json-request (concatenate 'string SLACK_MSG_URL
+  (https-json-request (concatenate 'string *slack-msg-url*
     "&username=" (cdr (assoc ':NAME slack)) "&channel=" channel "&text=" message)))
 
 (defun get-card-image (card)
-  (let ((api (concatenate 'string HS_API_URL (cl-ppcre:regex-replace-all " " card "%20")))
+  (let ((api (concatenate 'string *hs-api-url* (cl-ppcre:regex-replace-all " " card "%20")))
       (headers (list (cons "x-mashape-key" HS_API_KEY))))
     (cdr (assoc ':IMG (car (https-json-request api headers))))))
 
