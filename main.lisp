@@ -27,7 +27,7 @@
             (cdr (assoc ':CHANNEL payload))
             (cdr (assoc ':TEXT payload)))))
 
-(defun post-slack-message (slack message channel)
+(defun send-slack-message (slack message channel)
   (https-json-request *slack-msg-url* nil
     (list (cons "username" (cdr (assoc ':NAME slack))) (cons "channel" channel) (cons "text" message))))
 
@@ -43,7 +43,7 @@
   (search (concatenate 'string "<@" (cdr (assoc ':ID slack)) "> card ") message)))
 
 (defun send-card-image (slack card channel)
-  (post-slack-message slack (get-card-image card) channel))
+  (send-slack-message slack (get-card-image card) channel))
 
 (defun main ()
   (let* ((slack (get-slack-info))
