@@ -36,7 +36,7 @@
 
 (defun asked-for-card? (user-id type message)
   (and (string-equal type "message")
-  (search (concatenate 'string "<@" user-id "> card ") message)))
+       (eq (search (concatenate 'string "<@" user-id "> card ") message) 0)))
 
 (defun send-card-image (card channel)
   (send-slack-message (get-card-image card) channel))
