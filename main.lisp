@@ -10,7 +10,7 @@
 (defun https-json-request (url &optional headers)
   (let* ((resp (flexi-streams:octets-to-string
         (drakma:http-request url :additional-headers headers))))
-  (json:decode-json-from-string resp)))
+    (json:decode-json-from-string resp)))
 
 (defun make-client (slack)
   (wsd:make-client (cdr (assoc ':URL slack))))
