@@ -1,11 +1,11 @@
 (ql:quickload '(:drakma :cl-json :websocket-driver-client :cl-ppcre) :silent t)
 
-(defvar SLACK_API_KEY "xxxx")
-(defvar HS_API_KEY "xxxx")
+(defconstant SLACK_API_KEY "xxxx")
+(defconstant HS_API_KEY "xxxx")
 
-(defvar SLACK_RTM_URL (concatenate 'string "https://slack.com/api/rtm.start?token=" SLACK_API_KEY))
-(defvar SLACK_MSG_URL (concatenate 'string "https://slack.com/api/chat.postMessage?as_user=false&token=" SLACK_API_KEY))
-(defvar HS_API_URL "https://omgvamp-hearthstone-v1.p.mashape.com/cards/")
+(defconstant SLACK_RTM_URL (concatenate 'string "https://slack.com/api/rtm.start?token=" SLACK_API_KEY))
+(defconstant SLACK_MSG_URL (concatenate 'string "https://slack.com/api/chat.postMessage?as_user=false&token=" SLACK_API_KEY))
+(defconstant HS_API_URL "https://omgvamp-hearthstone-v1.p.mashape.com/cards/")
 
 (defun https-json-request (url &optional headers)
   (let* ((resp (flexi-streams:octets-to-string
