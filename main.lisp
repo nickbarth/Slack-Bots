@@ -7,9 +7,9 @@
 (defvar *slack-msg-url* (concatenate 'string "https://slack.com/api/chat.postMessage?as_user=false&token=" SLACK_API_KEY))
 (defvar *hs-api-url* "https://omgvamp-hearthstone-v1.p.mashape.com/cards/")
 
-(defun https-json-request (url &optional headers)
+(defun https-json-request (url &optional headers params)
   (let* ((resp (flexi-streams:octets-to-string
-        (drakma:http-request url :additional-headers headers))))
+        (drakma:http-request url :additional-headers headers :parameters params))))
     (json:decode-json-from-string resp)))
 
 (defun make-client (slack)
@@ -28,13 +28,15 @@
             (cdr (assoc ':TEXT payload)))))
 
 (defun post-slack-message (slack message channel)
-  (https-json-request (concatenate 'string *slack-msg-url*
-    "&username=" (cdr (assoc ':NAME slack)) "&channel=" channel "&text=" message)))
+  (https-json-request SLACK_MSG_URL nil
+    (list (cons "username" (cdr (assoc ':NAME slack))) (cons "channel" channel) (cons "text" message))))
 
 (defun get-card-image (card)
-  (let ((api (concatenate 'string *hs-api-url* (cl-ppcre:regex-replace-all " " card "%20")))
-      (headers (list (cons "x-mashape-key" HS_API_KEY))))
-    (cdr (assoc ':IMG (car (https-json-request api headers))))))
+  (let* ((api (concatenate 'string HS_API_URL (cl-ppcre:regex-replace-all " " card "%20")))
+        (headers (list (cons "x-mashape-key" HS_API_KEY)))
+        (json (car (https-json-request api headers))))
+    (if (eq (car json) ':ERROR) "Card Not Found"
+  (cdr (assoc ':IMG json)))))
 
 (defun asked-for-card? (slack type message)
   (and (string-equal type "message") 
