@@ -49,7 +49,7 @@
     (wsd:on :message client
       (lambda (data)
         (multiple-value-bind (type channel message) (parse-slack-data data)
-          (if  (asked-for-card? slack type message)
+          (if (asked-for-card? slack type message)
             (send-card-image slack (subseq message 18) channel)))))
     (as:with-event-loop ()
       (wsd:start-connection client))))
