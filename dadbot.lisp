@@ -101,9 +101,9 @@
   (https-json-request *slack-msg-url* nil
     (list (cons "channel" channel) (cons "text" message))))
 
-(defun asked-for-card? (user-id type message)
+(defun was-dad-mentioned? (type message)
   (and (string-equal type "message")
-       (eq (search (concatenate 'string "<@" user-id "> tell joke") message) 0)))
+       (search "dad" message)))
 
 (defun send-joke (channel)
   (send-slack-message (get-joke) channel))
@@ -114,7 +114,7 @@
       (wsd:on :message client
         (lambda (data)
           (multiple-value-bind (type channel message) (parse-slack-data data)
-            (if (asked-for-card? user-id type message)
+            (if (was-dad-mentioned? type message)
               (send-joke channel)))))
       (as:with-event-loop ()
         (wsd:start-connection client)))))
