@@ -1,6 +1,6 @@
-# Hearthstone Slack Bot
+# Slack Bots
 
-A Hearthstone Slack Bot in Lisp.
+A Slack Bot in Lisp for every occasion.
 
 #### Slack Bot API Key
 https://superiorfriends.slack.com/apps/A0F7YS25R-bots
