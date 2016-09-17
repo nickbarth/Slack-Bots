@@ -80,8 +80,7 @@
   "This graveyard looks overcrowded people must be dying to get in there."
   "Dad, can you put my shoes on? I don't think they'll fit me."
   "Dad, did you get a haircut? No I got them all cut."
-  "Have you heard of the band 1023MB? They haven't got a gig yet."
-))
+  "Have you heard of the band 1023MB? They haven't got a gig yet."))
 
 (defun get-joke () 
  (nth (random (length *jokes*)) *jokes*))
