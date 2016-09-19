@@ -1,4 +1,4 @@
-(ql:quickload '(:drakma :cl-json :websocket-driver-client :cl-ppcre) :silent t)
+(ql:quickload '(:drakma :cl-json :websocket-driver-client) :silent t)
 
 (defconstant SLACK_API_KEY "XXXX")
 
