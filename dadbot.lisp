@@ -70,7 +70,7 @@
   "What did the officer molecule say to the suspect molecule? I've got my ion you."
   "If prisoners could take their own mug shots they'd be called cellfies."
   "Why can't you hear a pterodactyl go to the bathroom? Because the pee is silent."
-  "I'm not addicated to brake fluid I can stop whenever I want."
+  "I'm not addicted to brake fluid I can stop whenever I want."
   "Why did the coffee file a police report? It got mugged."
   "Did you hear about the restaurant on the moon? Great food, no atmosphere."
   "I hate jokes about german sausages They're the wurst."
