@@ -1,6 +1,6 @@
 # Slack Bots
 
-A Slack Bot in Lisp for every occasion.
+A Slack Bot for every occasion.
 
 #### Slack Bot API Key
 https://superiorfriends.slack.com/apps/A0F7YS25R-bots
