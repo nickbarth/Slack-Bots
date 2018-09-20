@@ -5,11 +5,6 @@
 (defconstant SLACK_API_KEY "XXXX")
 (defvar *slack-rtm-url* (concatenate 'string "https://slack.com/api/rtm.start?token=" SLACK_API_KEY))
 
-(defun https-json-request (url &optional headers params)
-  (let* ((resp (flexi-streams:octets-to-string
-        (drakma:http-request url :additional-headers headers :parameters params))))
-    (json:decode-json-from-string resp)))
-
 (defvar *jokes* '(
   "What time did the man go to the dentist? Tooth hurt-y."
   "Did you hear about the guy who invented Lifesavers? They say he made a mint."
@@ -83,6 +78,11 @@
 
 (defun get-joke ()
  (nth (random (length *jokes*)) *jokes*))
+
+(defun https-json-request (url &optional headers params)
+  (let* ((resp (flexi-streams:octets-to-string
+        (drakma:http-request url :additional-headers headers :parameters params))))
+    (json:decode-json-from-string resp)))
 
 (defun get-slack-info ()
   (let ((json (https-json-request *slack-rtm-url*)))
